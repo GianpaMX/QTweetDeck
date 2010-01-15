@@ -4,8 +4,13 @@
 #
 #-------------------------------------------------
 
-TARGET = QTweetDeck
 TEMPLATE = app
+DESTDIR = ../bin
+OBJECTS_DIR = ../tmp
+TARGET = QTweetDeck
+
+INCLUDEPATH += ../include
+LIBS += -L../lib -lQTweetCore
 
 
 SOURCES += main.cpp\

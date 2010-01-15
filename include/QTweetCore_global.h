@@ -1,0 +1,12 @@
+#ifndef QTWEETCORE_GLOBAL_H
+#define QTWEETCORE_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(QTWEETCORE_LIBRARY)
+#  define QTWEETCORESHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define QTWEETCORESHARED_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // QTWEETCORE_GLOBAL_H

@@ -1,0 +1,12 @@
+#ifndef QTWEETGUI_GLOBAL_H
+#define QTWEETGUI_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(QTWEETGUI_LIBRARY)
+#  define QTWEETGUISHARED_EXPORT Q_DECL_EXPORT
+#else
+#  define QTWEETGUISHARED_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // QTWEETGUI_GLOBAL_H

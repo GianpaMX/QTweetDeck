@@ -4,12 +4,10 @@
 #
 #-------------------------------------------------
 
-QT       += network xml
-
-QT       -= gui
-
-TARGET = QTweetCore
 TEMPLATE = lib
+DESTDIR = ../lib
+OBJECTS_DIR = ../tmp
+TARGET = QTweetCore
 
 DEFINES += QTWEETCORE_LIBRARY
 
@@ -17,3 +15,6 @@ SOURCES += qtweetcore.cpp
 
 HEADERS += qtweetcore.h\
         QTweetCore_global.h
+
+QT       += network xml
+QT       -= gui

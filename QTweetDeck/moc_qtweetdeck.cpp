@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'qtweetdeck.h'
 **
-** Created: Fri Jan 15 05:28:03 2010
+** Created: Fri Jan 15 09:58:39 2010
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.0)
 **
 ** WARNING! All changes made in this file will be lost!
