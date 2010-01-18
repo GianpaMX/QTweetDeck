@@ -1,15 +1,15 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'qtweetdeck.h'
+** Meta object code from reading C++ file 'qtweetcolumncell.h'
 **
-** Created: Fri Jan 15 09:58:39 2010
+** Created: Sat Jan 16 11:22:16 2010
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "qtweetdeck.h"
+#include "qtweetcolumncell.h"
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'qtweetdeck.h' doesn't include <QObject>."
+#error "The header file 'qtweetcolumncell.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 62
 #error "This file was generated using the moc from 4.6.0. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -17,7 +17,7 @@
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
-static const uint qt_meta_data_QTweetDeck[] = {
+static const uint qt_meta_data_QTweetColumnCell[] = {
 
  // content:
        4,       // revision
@@ -33,35 +33,35 @@ static const uint qt_meta_data_QTweetDeck[] = {
        0        // eod
 };
 
-static const char qt_meta_stringdata_QTweetDeck[] = {
-    "QTweetDeck\0"
+static const char qt_meta_stringdata_QTweetColumnCell[] = {
+    "QTweetColumnCell\0"
 };
 
-const QMetaObject QTweetDeck::staticMetaObject = {
-    { &QMainWindow::staticMetaObject, qt_meta_stringdata_QTweetDeck,
-      qt_meta_data_QTweetDeck, 0 }
+const QMetaObject QTweetColumnCell::staticMetaObject = {
+    { &QWidget::staticMetaObject, qt_meta_stringdata_QTweetColumnCell,
+      qt_meta_data_QTweetColumnCell, 0 }
 };
 
 #ifdef Q_NO_DATA_RELOCATION
-const QMetaObject &QTweetDeck::getStaticMetaObject() { return staticMetaObject; }
+const QMetaObject &QTweetColumnCell::getStaticMetaObject() { return staticMetaObject; }
 #endif //Q_NO_DATA_RELOCATION
 
-const QMetaObject *QTweetDeck::metaObject() const
+const QMetaObject *QTweetColumnCell::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
 }
 
-void *QTweetDeck::qt_metacast(const char *_clname)
+void *QTweetColumnCell::qt_metacast(const char *_clname)
 {
     if (!_clname) return 0;
-    if (!strcmp(_clname, qt_meta_stringdata_QTweetDeck))
-        return static_cast<void*>(const_cast< QTweetDeck*>(this));
-    return QMainWindow::qt_metacast(_clname);
+    if (!strcmp(_clname, qt_meta_stringdata_QTweetColumnCell))
+        return static_cast<void*>(const_cast< QTweetColumnCell*>(this));
+    return QWidget::qt_metacast(_clname);
 }
 
-int QTweetDeck::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int QTweetColumnCell::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QMainWindow::qt_metacall(_c, _id, _a);
+    _id = QWidget::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
     return _id;

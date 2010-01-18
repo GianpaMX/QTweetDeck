@@ -10,10 +10,13 @@ OBJECTS_DIR = ../tmp
 TARGET = QTweetDeck
 
 INCLUDEPATH += ../include
-LIBS += -L../lib -lQTweetCore
+LIBS += -L../lib -lQTweetCore -lQTweetGui
 
 
 SOURCES += main.cpp\
         qtweetdeck.cpp
 
 HEADERS  += qtweetdeck.h
+
+QT += xml network
+CONFIG += crypto
