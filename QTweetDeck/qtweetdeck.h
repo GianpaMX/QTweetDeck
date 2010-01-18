@@ -2,20 +2,20 @@
 #define QTWEETDECK_H
 
 #include <QtGui/QMainWindow>
+#include <QPointer>
 
 #include "qtweetcolumns.h"
-#include "qtweetstatuslist.h"
+#include "qtweetpublictimelinemodel.h"
 
 class QTweetDeck : public QMainWindow {
     Q_OBJECT
     public:
         QTweetDeck(QWidget *parent = 0);
         ~QTweetDeck();
-    private slots:
-        void loadStatusList(const QTweetStatusList &list, const QString& error);
     private:
-        QTweetColumns *columns;
-        QTweetColumn *c;
+        QPointer<QTweetColumns> columns;
+        QPointer<QTweetColumn> c;
+        QPointer<QTweetPublicTimeLineModel> model;
 };
 
 #endif // QTWEETDECK_H

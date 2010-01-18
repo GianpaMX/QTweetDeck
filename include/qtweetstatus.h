@@ -12,7 +12,7 @@ class QTweetUser;
 class QTWEETCORESHARED_EXPORT QTweetStatus {
     public:
         explicit QTweetStatus();
-        explicit QTweetStatus(const QTweetStatus& other);
+        QTweetStatus(const QTweetStatus& other);
         virtual ~QTweetStatus();
 
         void setCreatedAt(const QDateTime& value);

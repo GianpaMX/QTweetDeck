@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QHBoxLayout>
 #include <QLabel>
+#include <QPointer>
 
 #include "QTweetGui_global.h"
 
@@ -15,8 +16,8 @@ class QTWEETGUISHARED_EXPORT QTweetColumnTitle : public QWidget {
         QString title() const;
         void setTitle(const QString &title);
     private:
-        QHBoxLayout *layout;
-        QLabel *columnTitle;
+        QPointer<QHBoxLayout> layout;
+        QPointer<QLabel> columnTitle;
 };
 
 #endif // QTWEETCOLUMNTITLE_H

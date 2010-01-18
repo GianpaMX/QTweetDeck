@@ -21,9 +21,9 @@ QTweetStatus::QTweetStatus(const QTweetStatus& other) {
 }
 
 QTweetStatus::~QTweetStatus() {
-    if(_user) delete _user;
-    if(in_reply_to_user) delete in_reply_to_user;
     if(in_reply_to_status)delete in_reply_to_status;
+    if(in_reply_to_user) delete in_reply_to_user;
+    if(_user) delete _user;
 }
 
 void QTweetStatus::setText(const QString &value) {
@@ -71,7 +71,12 @@ bool QTweetStatus::truncated() const {
 }
 
 void QTweetStatus::setInReplayToStatus(QTweetStatus* value) {
-    in_reply_to_status = value;
+    if(in_reply_to_status) delete in_reply_to_status;
+    in_reply_to_status = 0;
+    if(value) {
+        in_reply_to_status = new QTweetStatus;
+        *in_reply_to_status = *value;
+    }
 }
 
 void QTweetStatus::setInReplayToStatus(quint64 value) {
@@ -84,10 +89,15 @@ QTweetStatus* QTweetStatus::inReplayToStatus() const {
 }
 
 void QTweetStatus::setInReplayToUser(QTweetUser* value) {
-    in_reply_to_user = value;
+    if(in_reply_to_user) delete in_reply_to_user;
+    in_reply_to_user = 0;
+    if(value) {
+        in_reply_to_user = new QTweetUser;
+        *in_reply_to_user = *value;
+    }
 }
 
-void QTweetStatus::setInReplayToUser(quint64 value) {
+void QTweetStatus::setInReplayToUser(quint64 /*value*/) {
 //    if(!in_reply_to_user) in_reply_to_user = new QTweetUser;
 //    in_reply_to_user->setId(value);
 }
@@ -113,10 +123,15 @@ QString QTweetStatus::inReplayToScreenName() const {
 }
 
 void QTweetStatus::setUser(QTweetUser* value) {
-    _user = value;
+    if(_user) delete _user;
+    _user = 0;
+    if(value) {
+        _user = new QTweetUser;
+        *_user = *value;
+    }
 }
 
-void QTweetStatus::setUser(quint64 value) {
+void QTweetStatus::setUser(quint64 /*value*/) {
 //    if(!_user) _user = new QTweetUser;
 //    _user->setId(value);
 }
@@ -127,26 +142,9 @@ QTweetUser* QTweetStatus::user() const {
 
 QTweetStatus& QTweetStatus::operator=(const QTweetStatus& other) {
     if( this != &other ) {
-        if(_user) delete _user;
-        if(in_reply_to_user) delete in_reply_to_user;
-        if(in_reply_to_status)delete in_reply_to_status;
-        
-        in_reply_to_status = 0;
-        in_reply_to_user = 0;
-        _user = 0;
-
-        if(other._user) {
-            _user = new QTweetUser;
-            *_user = *other._user;
-        }
-        if(other.in_reply_to_user) {
-            in_reply_to_user = new QTweetUser;
-            *in_reply_to_user = *other.in_reply_to_user;
-        }
-        if(other.in_reply_to_status) {
-            in_reply_to_status = new QTweetStatus;
-            *in_reply_to_status = *other.in_reply_to_status;
-        }
+        setInReplayToStatus(other.in_reply_to_status);
+        setInReplayToUser(other.in_reply_to_user);
+        setUser(other._user);
 
         created_at = other.createdAt();
         _id = other._id;

@@ -12,13 +12,6 @@ QTweetDeck::QTweetDeck(QWidget *parent) : QMainWindow(parent) {
 
     setWindowTitle("QTweetDeck");
 
-    columns = new QTweetColumns;
-    columns->setBackgroundRole(QPalette::Dark);
-
-    setCentralWidget(columns);
-
-    c = 0;
-
     QByteArray key, secret;
     QFile file;
     file.setFileName("../qtweet_private/consumer.key");
@@ -36,24 +29,20 @@ QTweetDeck::QTweetDeck(QWidget *parent) : QMainWindow(parent) {
     QTweetCore::setConsumer(key, secret);
     QTweetCore::setRequestTimeout( 10000 );
 
-    connect(QTweetCore::Client(), SIGNAL(publicTimeLine(QTweetStatusList,QString)), this, SLOT(loadStatusList(QTweetStatusList,QString)));
-    QTweetCore::Client()->requestPublicTimeLine();
 
+    columns = new QTweetColumns;
+    columns->setBackgroundRole(QPalette::Dark);
+    setCentralWidget(columns);
+
+    model = new QTweetPublicTimeLineModel;
+    c = new QTweetColumn(model, "Public Time Line");
+    columns->addColumn(c);
 }
 
 QTweetDeck::~QTweetDeck() {
     if(c) delete c;
-    delete columns;
+    if(model) delete model;
+    if(columns) delete columns;
 
     QTweetCore::term();
-}
-
-void QTweetDeck::loadStatusList(const QTweetStatusList &list, const QString& error) {
-    if(!error.isEmpty()) {
-        QMessageBox::critical(this, "QTweetDeck", error);
-        return;
-    }
-
-    c = new QTweetColumn(list, "Public Time Line");
-    columns->addColumn(c);
 }

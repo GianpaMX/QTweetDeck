@@ -11,6 +11,8 @@ class QTWEETCORESHARED_EXPORT QTweetStatusList : public QList<QTweetStatus> {
     public:
         QTweetStatusList();
         QTweetStatusList(const QList<QTweetStatus> &other);
+
+        virtual void prependReverse(const QTweetStatusList& list);
 };
 
 #endif // QTWEETSTATUSLIST_H

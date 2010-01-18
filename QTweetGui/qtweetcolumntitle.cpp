@@ -8,8 +8,8 @@ QTweetColumnTitle::QTweetColumnTitle(const QString &title, QWidget * parent) :QW
 }
 
 QTweetColumnTitle::~QTweetColumnTitle() {
-    delete columnTitle;
-    delete layout;
+    if(columnTitle) delete columnTitle;
+    if(layout) delete layout;
 }
 
 QString QTweetColumnTitle::title() const {

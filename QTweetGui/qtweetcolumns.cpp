@@ -5,7 +5,7 @@ QTweetColumns::QTweetColumns(QWidget * parent) : QScrollArea(parent) {
     setLayout(layout);
 }
 QTweetColumns::~QTweetColumns() {
-    delete layout;
+    if(layout) delete layout;
 }
 
 void QTweetColumns::addColumn(QTweetColumn *column) {

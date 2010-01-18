@@ -14,12 +14,16 @@ SOURCES += qtweetgui.cpp \
     qtweetcolumn.cpp \
     qtweetcolumntitle.cpp \
     qtweetcolumnbuttons.cpp \
-    qtweetstatuslistmodel.cpp
+    qtweetstatuslistmodel.cpp \
+    qtweetpublictimelinemodel.cpp
 HEADERS += qtweetgui.h \
     QTweetGui_global.h \
     qtweetcolumns.h \
     qtweetcolumn.h \
     qtweetcolumntitle.h \
     qtweetcolumnbuttons.h \
-    qtweetstatuslistmodel.h
+    qtweetstatuslistmodel.h \
+    qtweetpublictimelinemodel.h
 RESOURCES += default_image_profile.qrc
+CONFIG += crypto
+QT += xml network

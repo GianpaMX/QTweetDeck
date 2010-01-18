@@ -5,14 +5,15 @@
 #include <QHBoxLayout>
 #include <QList>
 #include <QPushButton>
+#include <QPointer>
 
 class QTweetColumnButtons : public QWidget {
     public:
         explicit QTweetColumnButtons(QWidget *parent = 0);
         ~QTweetColumnButtons();
     private:
-        QHBoxLayout* layout;
-        QList<QPushButton*> buttons;
+        QPointer<QHBoxLayout> layout;
+        QList< QPointer<QPushButton> > buttons;
 };
 
 #endif // QTWEETCOLUMNBUTTONS_H

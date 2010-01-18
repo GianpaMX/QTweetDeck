@@ -3,6 +3,7 @@
 
 #include <QScrollArea>
 #include <QHBoxLayout>
+#include <QPointer>
 
 #include "qtweetcolumn.h"
 
@@ -16,7 +17,7 @@ class QTWEETGUISHARED_EXPORT QTweetColumns : public QScrollArea {
     public slots:
         void addColumn(QTweetColumn *column);
     private:
-        QHBoxLayout *layout;
+        QPointer<QHBoxLayout> layout;
 };
 
 #endif // QTWEETCOLUMNS_H

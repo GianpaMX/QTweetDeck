@@ -27,7 +27,7 @@ QTweetColumnButtons::QTweetColumnButtons(QWidget *parent) : QWidget(parent) {
 
 QTweetColumnButtons::~QTweetColumnButtons() {
     foreach(QPushButton *button, buttons) {
-        delete button;
+        if(button) delete button;
     }
-    delete layout;
+    if(layout) delete layout;
 }
