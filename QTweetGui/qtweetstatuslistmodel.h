@@ -1,7 +1,7 @@
 #ifndef QTWEETSTATUSLISTMODEL_H
 #define QTWEETSTATUSLISTMODEL_H
 
-#define QTWEETSTATUSLISTMODEL_COLUMNS   1
+#define QTWEETSTATUSLISTMODEL_COLUMNS   10
 
 #include <QAbstractTableModel>
 #include <QStringList>

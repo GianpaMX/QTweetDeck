@@ -4,6 +4,7 @@
 #include <QtOAuth/QtOAuth>
 #include <QByteArray>
 #include <QObject>
+#include <QDateTime>
 
 #include "qtweetclient.h"
 
@@ -17,6 +18,8 @@ class QTWEETCORESHARED_EXPORT QTweetCore {
 
         static void setConsumer(const QByteArray& key, const QByteArray& secret);
         static void setRequestTimeout(uint requestTimeout);
+
+        static QDateTime fromStringDateTime(const QString& string);
 
         static QTweetClient* Client();
     private:

@@ -1,6 +1,9 @@
+#include <QDebug>
 #include "qtweetstatuslistmodel.h"
 
-QStringList QTweetStatusListModel::headerText = QStringList() << "Text";
+QStringList QTweetStatusListModel::headerText =
+        QStringList() << "Created At" << "ID" << "Text" << "Source" << "Truncated"
+         << "In Replay to Status" << "In Replay to User" << "Favorited" << "In Replay to ScreenName" << "User";
 
 QTweetStatusListModel::QTweetStatusListModel(QObject *parent) : QAbstractTableModel(parent) {
 }
@@ -27,7 +30,16 @@ QVariant QTweetStatusListModel::data(const QModelIndex & index, int role) const 
 
     if (role == Qt::DisplayRole) {
         switch(index.column()) {
-            case 0:return statusList.at(index.row()).text();
+            case 0: return statusList.at(index.row()).createdAt();
+            case 1: return statusList.at(index.row()).id();
+            case 2: return statusList.at(index.row()).text();
+            case 3: return statusList.at(index.row()).source();
+            case 4: return qVariantFromValue(statusList.at(index.row()).truncated());
+            case 5: return statusList.at(index.row()).inReplayToStatus()?statusList.at(index.row()).inReplayToStatus()->id():0;
+            case 6: return qVariantFromValue(static_cast<void*>(statusList.at(index.row()).inReplayToUser()));
+            case 7: return statusList.at(index.row()).favorited();
+            case 8: return statusList.at(index.row()).inReplayToScreenName();
+            case 9: return qVariantFromValue(static_cast<void*>(statusList.at(index.row()).user()));
             default: return QVariant();
         }
     } else

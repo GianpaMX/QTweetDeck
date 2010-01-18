@@ -4,11 +4,11 @@
 #include "qtweetstatus.h"
 
 QTweetClient::QTweetClient(QObject * parent) : QObject(parent) {
-    if(reply) delete reply;
     manager = new QNetworkAccessManager (this);
 }
 
 QTweetClient::~QTweetClient() {
+    if(reply) delete reply;
     delete manager;
 }
 
@@ -35,7 +35,7 @@ void QTweetClient::replayPublicTimeLine() {
     }
     QDomElement root = domDocument.documentElement();
     if (root.tagName() != "statuses") {
-        error = "This isn't a statuses replay";
+        error = "This isn't a statuses public time line";
         emit publicTimeLine(list, error);
         return;
     }
@@ -54,8 +54,37 @@ void QTweetClient::replayPublicTimeLine() {
 
 void QTweetClient::addStatusElement(const QDomElement& xmlstatus, QTweetStatusList& list) {
     QTweetStatus status;
-    QString text = xmlstatus.firstChildElement("text").text();
-    status.setText(text);
+    QString tmp;
+
+    tmp = xmlstatus.firstChildElement("created_at").text();
+    status.setCreatedAt(tmp);
+
+    tmp = xmlstatus.firstChildElement("id").text();
+    status.setId(tmp.toULongLong());
+
+    tmp = xmlstatus.firstChildElement("text").text();
+    status.setText(tmp);
+
+    tmp = xmlstatus.firstChildElement("source").text();
+    status.setSource(tmp);
+
+    tmp = xmlstatus.firstChildElement("truncated").text();
+    status.setTruncated(tmp == "true");
+
+    tmp = xmlstatus.firstChildElement("in_reply_to_status_id").text();
+    status.setInReplayToStatus(tmp.toLongLong());
+
+    tmp = xmlstatus.firstChildElement("in_reply_to_user_id").text();
+    status.setInReplayToUser(tmp.toLongLong());
+
+    tmp = xmlstatus.firstChildElement("favorited").text();
+    status.setFavorited(tmp == "true");
+
+    tmp = xmlstatus.firstChildElement("in_reply_to_screen_name").text();
+    status.setInReplayToScreenName(tmp);
+
+//    tmp = xmlstatus.firstChildElement("user").text();
+//    status.setCreatedAt(tmp);
 
     list << status;
 }
