@@ -5,15 +5,18 @@
 #include <QString>
 #include <QDateTime>
 
+#include "qtweetelement.h"
 #include "qtweetstatuslist.h"
 
 #include "QTweetCore_global.h"
 
-class QTWEETCORESHARED_EXPORT QTweetUser {
+class QTWEETCORESHARED_EXPORT QTweetUser : public QTweetElement {
     public:
-        explicit QTweetUser();
-    public:
-        quint64 id;
+        explicit QTweetUser(quint64 id = 0);
+        QTweetUser(const QTweetUser& other);
+        virtual ~QTweetUser();
+    private:
+
         QString name;
         QString screen_name;
         QString location;

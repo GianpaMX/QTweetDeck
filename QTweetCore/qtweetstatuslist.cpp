@@ -1,13 +1,28 @@
 #include "qtweetstatuslist.h"
 
-QTweetStatusList::QTweetStatusList() : QList<QTweetStatus>() {
+QTweetStatusList::QTweetStatusList() : QTweetElementList(), QList<QTweetStatus>() {
 }
 
-QTweetStatusList::QTweetStatusList(const QList<QTweetStatus> &other) : QList<QTweetStatus>(other) {
+QTweetStatusList::QTweetStatusList(const QTweetStatusList& other) : QTweetElementList(other), QList<QTweetStatus>(other) {
 }
 
-void QTweetStatusList::prependReverse(const QTweetStatusList& list) {
-    for(int i=list.count()-1;i>=0;i--) {
-        insert(0, list.at(i));
-    }
+const QTweetElement& QTweetStatusList::atIndex(int i) const {
+    return at(i);
+}
+
+//const QTweetStatus& QTweetStatusList::atIndex(int i) const {
+//    return at(i);
+//}
+
+int QTweetStatusList::countElements() const {
+    return count();
+}
+
+void QTweetStatusList::insertElement(int i, const QTweetElement& value) {
+    const QTweetStatus& status = static_cast<const QTweetStatus&>(value);
+    insertElement(i, status);
+}
+
+void QTweetStatusList::insertElement(int i, const QTweetStatus& value) {
+    insert(i, value);
 }

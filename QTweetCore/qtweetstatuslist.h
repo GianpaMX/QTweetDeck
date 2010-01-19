@@ -3,16 +3,21 @@
 
 #include <QList>
 
+#include "qtweetelementlist.h"
 #include "qtweetstatus.h"
 
 #include "QTweetCore_global.h"
 
-class QTWEETCORESHARED_EXPORT QTweetStatusList : public QList<QTweetStatus> {
+class QTWEETCORESHARED_EXPORT QTweetStatusList : public QTweetElementList, public QList<QTweetStatus> {
     public:
         QTweetStatusList();
-        QTweetStatusList(const QList<QTweetStatus> &other);
+        QTweetStatusList(const QTweetStatusList &other);
 
-        virtual void prependReverse(const QTweetStatusList& list);
+        virtual const QTweetElement& atIndex(int i) const;
+//        virtual const QTweetStatus& atIndex(int i) const;
+        virtual int countElements() const;
+        virtual void insertElement(int i, const QTweetElement& value);
+        virtual void insertElement(int i, const QTweetStatus& value);
 };
 
 #endif // QTWEETSTATUSLIST_H

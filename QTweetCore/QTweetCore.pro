@@ -10,13 +10,21 @@ SOURCES += qtweetcore.cpp \
     qtweetuser.cpp \
     qtweetstatus.cpp \
     qtweetstatuslist.cpp \
-    qtweetclient.cpp
+    qtweetclient.cpp \
+    qtweetelement.cpp \
+    qtweetelementlist.cpp \
+    qtweetuserlist.cpp \
+    qtweetstatusesclient.cpp
 HEADERS += qtweetcore.h \
     QTweetCore_global.h \
     qtweetuser.h \
     qtweetstatus.h \
     qtweetstatuslist.h \
-    qtweetclient.h
+    qtweetclient.h \
+    qtweetelement.h \
+    qtweetelementlist.h \
+    qtweetuserlist.h \
+    qtweetstatusesclient.h
 QT += network \
     xml
 QT -= gui

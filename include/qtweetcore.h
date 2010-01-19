@@ -6,8 +6,6 @@
 #include <QObject>
 #include <QDateTime>
 
-#include "qtweetclient.h"
-
 #include "QTweetCore_global.h"
 
 class QTWEETCORESHARED_EXPORT QTweetCore {
@@ -21,14 +19,11 @@ class QTWEETCORESHARED_EXPORT QTweetCore {
 
         static QDateTime fromStringDateTime(const QString& string);
 
-        static QTweetClient* Client();
     private:
         explicit QTweetCore();
         explicit QTweetCore(const QTweetCore& other);
 
         static QOAuth::Interface *qoauth;
-        static QTweetClient* client;
-//        static QMap<quint64,
 };
 
 #endif // QTWEETCORE_H

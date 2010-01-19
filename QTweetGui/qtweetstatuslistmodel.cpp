@@ -38,7 +38,7 @@ QVariant QTweetStatusListModel::data(const QModelIndex & index, int role) const 
 
     if (index.row() >= statusList->size())
         return QVariant();
-    if (index.column() >= QTWEETSTATUSLISTMODEL_COLUMNS)
+    if (index.column() >= headerText.count())
         return QVariant();
 
     if (role == Qt::DisplayRole) {
@@ -64,7 +64,7 @@ int QTweetStatusListModel::rowCount(const QModelIndex & /*parent*/) const {
 }
 
 int QTweetStatusListModel::columnCount(const QModelIndex & /*parent*/) const {
-    return QTWEETSTATUSLISTMODEL_COLUMNS;
+    return headerText.count();
 }
 
 QVariant QTweetStatusListModel::headerData(int section, Qt::Orientation orientation, int role) const {

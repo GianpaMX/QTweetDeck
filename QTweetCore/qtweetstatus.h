@@ -2,25 +2,27 @@
 #define QTWEETSTATUS_H
 
 #include <QtGlobal>
+#include <QtXml>
 #include <QString>
 #include <QDateTime>
+
+#include "qtweetelement.h"
 
 #include "QTweetCore_global.h"
 
 class QTweetUser;
 
-class QTWEETCORESHARED_EXPORT QTweetStatus {
+class QTWEETCORESHARED_EXPORT QTweetStatus : public QTweetElement {
     public:
-        explicit QTweetStatus();
+        explicit QTweetStatus(quint64 id = 0);
         QTweetStatus(const QTweetStatus& other);
         virtual ~QTweetStatus();
+
+        virtual void updateFromDomElement(const QDomElement& domelement);
 
         void setCreatedAt(const QDateTime& value);
         void setCreatedAt(const QString& value);
         QDateTime createdAt() const;
-
-        void setId(quint64 value);
-        quint64 id() const;
 
         void setText(const QString& value);
         QString text() const;
@@ -49,11 +51,10 @@ class QTWEETCORESHARED_EXPORT QTweetStatus {
         void setUser(quint64 value);
         QTweetUser* user() const;
 
-        QTweetStatus& operator=(const QTweetStatus& other);
+        virtual QTweetStatus& operator=(const QTweetStatus& other);
 
     private:
         QDateTime created_at;
-        quint64 _id;
         QString _text;
         QString _source;
         bool _truncated;

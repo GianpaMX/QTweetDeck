@@ -1,20 +1,19 @@
 #include <QDate>
 #include <QTime>
+#include <cstdio>
+
 #include "qtweetcore.h"
 
 QOAuth::Interface* QTweetCore::qoauth = 0;
-QTweetClient* QTweetCore::client = 0;
 
 QTweetCore::QTweetCore() {
 }
 
 void QTweetCore::init(QObject* parent) {
     if(QTweetCore::qoauth == 0) QTweetCore::qoauth = new QOAuth::Interface(parent);
-    if(QTweetCore::client == 0) QTweetCore::client = new QTweetClient(parent);
 }
 void QTweetCore::term() {
     if(QTweetCore::qoauth != 0) delete QTweetCore::qoauth;
-    if(QTweetCore::client != 0) delete QTweetCore::client;
 }
 
 void QTweetCore::setConsumer(const QByteArray& key, const QByteArray& secret) {
@@ -26,9 +25,6 @@ void QTweetCore::setRequestTimeout(uint requestTimeout) {
     QTweetCore::qoauth->setRequestTimeout(requestTimeout);
 }
 
-QTweetClient* QTweetCore::Client() {
-    return client;
-}
 QDateTime QTweetCore::fromStringDateTime(const QString& string) {
     // this was taken from: Choqok, the KDE micro-blogging client
     // http://choqok.sourcearchive.com/documentation/0.6.1-0ubuntu3/backend_8cpp-source.html

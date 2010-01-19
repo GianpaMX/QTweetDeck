@@ -7,12 +7,12 @@
 #include "qtweetuser.h"
 #include "qtweetstatus.h"
 
-QTweetStatus::QTweetStatus() {
+QTweetStatus::QTweetStatus(quint64 id) : QTweetElement(id) {
     in_reply_to_status = 0;
     in_reply_to_user = 0;
     _user = 0;
 }
-QTweetStatus::QTweetStatus(const QTweetStatus& other) {
+QTweetStatus::QTweetStatus(const QTweetStatus& other) :QTweetElement(other) {
     in_reply_to_status = 0;
     in_reply_to_user = 0;
     _user = 0;
@@ -44,14 +44,6 @@ void QTweetStatus::setCreatedAt(const QString& value) {
 
 QDateTime QTweetStatus::createdAt() const {
     return created_at;
-}
-
-void QTweetStatus::setId(quint64 value) {
-    _id = value;
-}
-
-quint64 QTweetStatus::id() const {
-    return _id;
 }
 
 void QTweetStatus::setSource(const QString& value) {
@@ -142,12 +134,13 @@ QTweetUser* QTweetStatus::user() const {
 
 QTweetStatus& QTweetStatus::operator=(const QTweetStatus& other) {
     if( this != &other ) {
+        QTweetElement::operator =(other);
+
         setInReplayToStatus(other.in_reply_to_status);
         setInReplayToUser(other.in_reply_to_user);
         setUser(other._user);
 
         created_at = other.createdAt();
-        _id = other._id;
         _text = other._text;
         _source = other._source;
         _truncated = other._truncated;
@@ -155,4 +148,33 @@ QTweetStatus& QTweetStatus::operator=(const QTweetStatus& other) {
         in_reply_to_screen_name = other.in_reply_to_screen_name;
     }
     return *this;
+}
+void QTweetStatus::updateFromDomElement(const QDomElement& domelement) {
+    QTweetElement::updateFromDomElement(domelement);
+
+    QString tmp;
+
+    tmp = domelement.firstChildElement("created_at").text();
+    setCreatedAt(tmp);
+
+    tmp = domelement.firstChildElement("text").text();
+    setText(tmp);
+
+    tmp = domelement.firstChildElement("source").text();
+    setSource(tmp);
+
+    tmp = domelement.firstChildElement("truncated").text();
+    setTruncated(tmp == "true");
+
+    tmp = domelement.firstChildElement("in_reply_to_status_id").text();
+    setInReplayToStatus(tmp.toLongLong());
+
+    tmp = domelement.firstChildElement("in_reply_to_user_id").text();
+    setInReplayToUser(tmp.toLongLong());
+
+    tmp = domelement.firstChildElement("favorited").text();
+    setFavorited(tmp == "true");
+
+    tmp = domelement.firstChildElement("in_reply_to_screen_name").text();
+    setInReplayToScreenName(tmp);
 }
