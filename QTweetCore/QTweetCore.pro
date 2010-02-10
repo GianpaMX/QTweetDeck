@@ -6,25 +6,18 @@ DESTDIR = ../lib
 OBJECTS_DIR = ../tmp
 TARGET = QTweetCore
 DEFINES += QTWEETCORE_LIBRARY
-SOURCES += qtweetcore.cpp \
-    qtweetuser.cpp \
-    qtweetstatus.cpp \
-    qtweetstatuslist.cpp \
-    qtweetclient.cpp \
-    qtweetelement.cpp \
-    qtweetelementlist.cpp \
-    qtweetuserlist.cpp \
-    qtweetstatusesclient.cpp
-HEADERS += qtweetcore.h \
-    QTweetCore_global.h \
-    qtweetuser.h \
-    qtweetstatus.h \
-    qtweetstatuslist.h \
-    qtweetclient.h \
-    qtweetelement.h \
-    qtweetelementlist.h \
-    qtweetuserlist.h \
-    qtweetstatusesclient.h
+SOURCES += client.cpp \
+    abstractclient.cpp \
+    user.cpp \
+    status.cpp \
+    statuslist.cpp
+HEADERS += QTweetCore_global.h \
+    client.h \
+    abstractclient.h \
+    qtweetcore.h \
+    user.h \
+    status.h \
+    statuslist.h
 QT += network \
     xml
 QT -= gui

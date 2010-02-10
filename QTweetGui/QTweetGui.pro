@@ -9,21 +9,9 @@ INCLUDEPATH += ../include
 LIBS += -L../lib \
     -lQTweetCore
 DEFINES += QTWEETGUI_LIBRARY
-SOURCES += qtweetgui.cpp \
-    qtweetcolumns.cpp \
-    qtweetcolumn.cpp \
-    qtweetcolumntitle.cpp \
-    qtweetcolumnbuttons.cpp \
-    qtweetstatuslistmodel.cpp \
-    qtweetpublictimelinemodel.cpp
-HEADERS += qtweetgui.h \
-    QTweetGui_global.h \
-    qtweetcolumns.h \
-    qtweetcolumn.h \
-    qtweetcolumntitle.h \
-    qtweetcolumnbuttons.h \
-    qtweetstatuslistmodel.h \
-    qtweetpublictimelinemodel.h
-RESOURCES += default_image_profile.qrc
+SOURCES += 
+HEADERS += QTweetGui_global.h
+RESOURCES += 
 CONFIG += crypto
-QT += xml network
+QT += xml \
+    network

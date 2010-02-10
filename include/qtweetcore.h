@@ -1,29 +1,15 @@
 #ifndef QTWEETCORE_H
 #define QTWEETCORE_H
 
-#include <QtOAuth/QtOAuth>
-#include <QByteArray>
-#include <QObject>
-#include <QDateTime>
+#include <QString>
+#include <QMap>
 
-#include "QTweetCore_global.h"
-
-class QTWEETCORESHARED_EXPORT QTweetCore {
-    public:
-
-        static void init(QObject* parent = 0);
-        static void term();
-
-        static void setConsumer(const QByteArray& key, const QByteArray& secret);
-        static void setRequestTimeout(uint requestTimeout);
-
-        static QDateTime fromStringDateTime(const QString& string);
-
-    private:
-        explicit QTweetCore();
-        explicit QTweetCore(const QTweetCore& other);
-
-        static QOAuth::Interface *qoauth;
-};
+namespace QTweet {
+  class AbstractClient;
+  class Client;
+  class User;
+  class Status;
+  class StatusList;
+}
 
 #endif // QTWEETCORE_H

@@ -1,15 +1,12 @@
+#include <QFile>
 #include <QMessageBox>
 #include <QByteArray>
 #include <QInputDialog>
 #include <QDebug>
 
 #include "qtweetdeck.h"
-#include "qtweetcolumn.h"
-#include "qtweetcore.h"
 
 QTweetDeck::QTweetDeck(QWidget *parent) : QMainWindow(parent) {
-    QTweetCore::init(this);
-
     setWindowTitle("QTweetDeck");
 
     QByteArray key, secret;
@@ -26,23 +23,9 @@ QTweetDeck::QTweetDeck(QWidget *parent) : QMainWindow(parent) {
         file.close();
     }
 
-    QTweetCore::setConsumer(key, secret);
-    QTweetCore::setRequestTimeout( 10000 );
-
-
-    columns = new QTweetColumns;
-    columns->setBackgroundRole(QPalette::Dark);
-    setCentralWidget(columns);
-
-    model = new QTweetPublicTimeLineModel;
-    c = new QTweetColumn(model, "Public Time Line");
-    columns->addColumn(c);
+//    QTweetCore::setConsumer(key, secret);
+//    QTweetCore::setRequestTimeout( 10000 );
 }
 
 QTweetDeck::~QTweetDeck() {
-    if(c) delete c;
-    if(model) delete model;
-    if(columns) delete columns;
-
-    QTweetCore::term();
 }
