@@ -10,8 +10,9 @@
 #include "QTweetCore_global.h"
 
 #include "user.h"
+#include "tweet.h"
 
-class QTWEETCORESHARED_EXPORT QTweet::Status : public QTweet::User {
+class QTWEETCORESHARED_EXPORT QTweet::Status : public QTweet::User, public virtual QTweet::Tweet {
   public:
     Status();
 
@@ -23,8 +24,12 @@ class QTWEETCORESHARED_EXPORT QTweet::Status : public QTweet::User {
     QDateTime createat() const;
     void setCreateAt(const QDateTime &value);
 
+    User user() const;
+
     QString text() const;
     void setText(const QString &value);
+
+    QDateTime datetime() const;
 
     QString source() const;
     void setSource(const QString &value);

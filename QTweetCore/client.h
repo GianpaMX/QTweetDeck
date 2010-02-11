@@ -2,18 +2,29 @@
 #define CLIENT_H
 
 #include <QObject>
+#include <QPointer>
 
 #include "qtweetcore.h"
 #include "QTweetCore_global.h"
 
 #include "abstractclient.h"
+#include "reply.h"
 
-class QTWEETCORESHARED_EXPORT QTweet::Client : public virtual QTweet::AbstractClient {
+class QTWEETCORESHARED_EXPORT QTweet::Client : public QTweet::AbstractClient {
   Q_OBJECT
   public:
     explicit Client(QObject *parent = 0);
+    virtual ~Client();
   signals:
+    void PublicTimeLine(StatusList statuses);
+    void Error(const QString &error);
   public slots:
+    Reply* requestPublicTimeLine();
+  protected slots:
+    virtual void processReply(int i, Tweets & tweets);
+    virtual void notAuthorized(int i);
+  private:
+    QMap< int, QPointer<Reply> > replys;
 };
 
 #endif // CLIENT_H

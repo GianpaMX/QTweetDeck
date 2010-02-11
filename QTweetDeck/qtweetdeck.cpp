@@ -5,6 +5,8 @@
 #include <QDebug>
 
 #include "qtweetdeck.h"
+#include "client.h"
+#include "tweet.h"
 
 QTweetDeck::QTweetDeck(QWidget *parent) : QMainWindow(parent) {
     setWindowTitle("QTweetDeck");
@@ -25,7 +27,20 @@ QTweetDeck::QTweetDeck(QWidget *parent) : QMainWindow(parent) {
 
 //    QTweetCore::setConsumer(key, secret);
 //    QTweetCore::setRequestTimeout( 10000 );
+
+    c = new QTweet::Client();
+    r = c->requestPublicTimeLine();
+
+    connect(r, SIGNAL(dataReady()), this, SLOT(printStatusList()));
 }
 
 QTweetDeck::~QTweetDeck() {
+  delete r;
+  delete c;
+}
+
+void QTweetDeck::printStatusList() {
+  for(int i = 0; i < r->data().countAll(); i++) {
+    qDebug() << r->data().tweetAt(i).user().name() << " " << r->data().tweetAt(i).text();
+  }
 }

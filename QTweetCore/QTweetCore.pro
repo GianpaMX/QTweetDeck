@@ -10,14 +10,19 @@ SOURCES += client.cpp \
     abstractclient.cpp \
     user.cpp \
     status.cpp \
-    statuslist.cpp
+    statuslist.cpp \
+    qtweetcore.cpp \
+    reply.cpp
 HEADERS += QTweetCore_global.h \
     client.h \
     abstractclient.h \
     qtweetcore.h \
     user.h \
     status.h \
-    statuslist.h
+    statuslist.h \
+    reply.h \
+    tweet.h \
+    tweets.h
 QT += network \
     xml
 QT -= gui
