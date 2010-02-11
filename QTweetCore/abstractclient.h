@@ -6,7 +6,6 @@
 #include <QPointer>
 #include <QSignalMapper>
 #include <QList>
-#include <QMap>
 
 #include "qtweetcore.h"
 #include "QTweetCore_global.h"
@@ -24,7 +23,7 @@ class QTWEETCORESHARED_EXPORT QTweet::AbstractClient : public QObject {
     virtual void processReply(int i, Tweets & tweets) = 0;
     virtual void notAuthorized(int i) = 0;
   protected:
-    virtual int request(const QString & url, QMap<QByteArray, QByteArray> parameters = QMap<QByteArray, QByteArray>());
+    virtual int request(const QString & url);
   private slots:
     void replyed(int i);
     void slotError(QNetworkReply::NetworkError error);

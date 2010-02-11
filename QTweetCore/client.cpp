@@ -24,6 +24,18 @@ Reply* Client::requestPublicTimeLine() {
 
   return r;
 }
+Reply* Client::requestUserTimeLine(const User &user) {
+  StatusList *statuses = new StatusList;
+  Reply *r = new Reply(*statuses);
+  QMap<QByteArray, QByteArray> parameters;
+  parameters.insert("user_id", QString::number(user.userid()).toAscii());
+
+  int i = request("http://twitter.com/statuses/user_timeline.xml");
+
+  replys.insert(i, r);
+
+  return r;
+}
 
 void Client::processReply(int i, Tweets & tweets) {
   Reply *r = replys.value(i);

@@ -1,5 +1,6 @@
 #include <cstdio>
 #include "qtweetcore.h"
+#include "oauth.h"
 
 QDateTime QTweet::fromStringDateTime(const QString& string) {
   // this was taken from: Choqok, the KDE micro-blogging client
@@ -44,4 +45,8 @@ QDateTime QTweet::fromStringDateTime(const QString& string) {
 
   recognized.setTimeSpec( Qt::UTC );
   return recognized.toLocalTime();
+}
+
+void QTweet::setConsumer(const QByteArray &key, const QByteArray &secret) {
+  OAuth::setConsumer(key, secret);
 }

@@ -16,10 +16,10 @@ class QTWEETCORESHARED_EXPORT QTweet::Client : public QTweet::AbstractClient {
     explicit Client(QObject *parent = 0);
     virtual ~Client();
   signals:
-    void PublicTimeLine(StatusList statuses);
     void Error(const QString &error);
   public slots:
     Reply* requestPublicTimeLine();
+    Reply* requestUserTimeLine(const User &user);
   protected slots:
     virtual void processReply(int i, Tweets & tweets);
     virtual void notAuthorized(int i);

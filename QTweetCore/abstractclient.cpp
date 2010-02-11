@@ -30,6 +30,7 @@ void AbstractClient::replyed(int i) {
   QDomElement root = domDocument.documentElement();
   if(root.tagName()== "hash") {
     notAuthorized(i);
+    emit errorReplyed(i, root.firstChildElement("error").text());
   } else if(root.tagName()== "statuses") {
     QDomElement status_element = root.firstChildElement("status");
     while (!status_element.isNull()) {
@@ -67,7 +68,7 @@ void AbstractClient::replyed(int i) {
   reply->deleteLater();
 }
 
-int AbstractClient::request(const QString & url, QMap<QByteArray, QByteArray> /*parameters*/) {
+int AbstractClient::request(const QString & url) {
   uint request_id = requestCounter++;
 
   QNetworkRequest request;
