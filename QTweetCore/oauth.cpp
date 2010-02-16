@@ -3,8 +3,6 @@
 using namespace QTweet;
 
 QOAuth::Interface *OAuth::qoauth = 0;
-//QByteArray OAuth::consumer_key;
-//QByteArray OAuth::consumer_secret;
 int OAuth::instancesCounter = 0;
 
 OAuth::OAuth() {
@@ -15,6 +13,9 @@ OAuth::OAuth() {
     OAuth::qoauth->setConsumerSecret(OAuth::consumer_secret);
   }
   OAuth::instancesCounter++;
+
+  token = "";
+  token_secret = "";
 }
 
 OAuth::~OAuth() {
@@ -27,6 +28,7 @@ OAuth::~OAuth() {
 QString OAuth::requestUrl(const QString &url, QOAuth::ParamMap map) const {
   QString urlCopy = url;
   QByteArray content;
-  content = OAuth::qoauth->createParametersString(urlCopy, QOAuth::GET, OAuth::consumer_key, OAuth::consumer_secret, QOAuth::HMAC_SHA1, map, QOAuth::ParseForInlineQuery);
+
+  content = OAuth::qoauth->createParametersString(urlCopy, QOAuth::GET, token, token_secret, QOAuth::HMAC_SHA1, map, QOAuth::ParseForInlineQuery);
   return urlCopy.append(content);
 }

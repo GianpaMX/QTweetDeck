@@ -23,6 +23,8 @@ void AbstractClient::replyed(int i) {
   QString error;
 
   if(!domDocument.setContent(reply, true, &error)) {
+    qDebug() << "AbstractClient::replyed" << error;
+
     emit errorReplyed(i, error);
     reply->deleteLater();
     return;
@@ -49,7 +51,7 @@ void AbstractClient::replyed(int i) {
   } else if(root.tagName() == "users" || root.tagName() == "user") {
     QDomElement user_element = root.tagName() == "users" ? root.firstChildElement("user") : root;
     while (!user_element.isNull()) {
-      QDomElement status_element = status_element.firstChildElement("status");
+      QDomElement status_element = user_element.firstChildElement("status");
 
       Status status;
       User & user = status;
@@ -81,7 +83,7 @@ int AbstractClient::request(const QString & url, QOAuth::ParamMap map) {
 
 
   QNetworkReply *reply = AbstractClient::networkManager->get(request);
-  connect(reply, SIGNAL(readyRead()), requestMapper, SLOT(map()));
+  connect(reply, SIGNAL(finished()), requestMapper, SLOT(map()));
   connect(reply, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(slotError(QNetworkReply::NetworkError)));
 
   requestMapper->setMapping(reply, request_id);
