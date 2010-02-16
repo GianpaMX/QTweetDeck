@@ -4,6 +4,7 @@
 TEMPLATE = lib
 DESTDIR = ../lib
 OBJECTS_DIR = ../tmp
+INCLUDEPATH += ../include
 TARGET = QTweetCore
 DEFINES += QTWEETCORE_LIBRARY
 SOURCES += client.cpp \

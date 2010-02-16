@@ -15,6 +15,7 @@
 class QTWEETCORESHARED_EXPORT QTweet::Status : public QTweet::User, public virtual QTweet::Tweet {
   public:
     Status();
+    Status(const Status &other);
 
     void readDomElement(const QDomElement& xmluser);
 
@@ -33,6 +34,8 @@ class QTWEETCORESHARED_EXPORT QTweet::Status : public QTweet::User, public virtu
 
     QString source() const;
     void setSource(const QString &value);
+
+    Status &operator=(const Status &other);
   private:
     qulonglong status_id;
     QDateTime status_created_at;

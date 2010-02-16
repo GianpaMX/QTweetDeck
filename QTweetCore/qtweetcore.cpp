@@ -46,7 +46,3 @@ QDateTime QTweet::fromStringDateTime(const QString& string) {
   recognized.setTimeSpec( Qt::UTC );
   return recognized.toLocalTime();
 }
-
-void QTweet::setConsumer(const QByteArray &key, const QByteArray &secret) {
-  OAuth::setConsumer(key, secret);
-}

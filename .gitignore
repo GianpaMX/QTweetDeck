@@ -66,3 +66,6 @@ doc/api/html/*
 # --------
 bin/*
 
+
+# Consumer Key and Secret
+consumer_key_secret.cpp

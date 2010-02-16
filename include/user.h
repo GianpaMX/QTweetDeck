@@ -11,6 +11,7 @@
 class QTWEETCORESHARED_EXPORT QTweet::User {
   public:
     User();
+    User(const User &other);
 
     void readDomElement(const QDomElement& xmluser);
 
@@ -25,6 +26,8 @@ class QTWEETCORESHARED_EXPORT QTweet::User {
 
     QString profileimageurl() const;
     void setProfileImageUrl(const QString &value);
+
+    User &operator=(const User &other);
   private:
     qulonglong user_id;
     QString user_name;

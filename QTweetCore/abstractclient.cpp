@@ -28,11 +28,11 @@ void AbstractClient::replyed(int i) {
     return;
   }
   QDomElement root = domDocument.documentElement();
-  if(root.tagName()== "hash") {
+  if(root.tagName() == "hash") {
     notAuthorized(i);
     emit errorReplyed(i, root.firstChildElement("error").text());
-  } else if(root.tagName()== "statuses") {
-    QDomElement status_element = root.firstChildElement("status");
+  } else if(root.tagName() == "statuses" || root.tagName() == "status") {
+    QDomElement status_element = root.tagName() == "statuses" ? root.firstChildElement("status") : root;
     while (!status_element.isNull()) {
       QDomElement user_element = status_element.firstChildElement("user");
 
@@ -46,8 +46,8 @@ void AbstractClient::replyed(int i) {
 
       status_element = status_element.nextSiblingElement("status");
     }
-  } else if(root.tagName() == "users") {
-    QDomElement user_element = root.firstChildElement("user");
+  } else if(root.tagName() == "users" || root.tagName() == "user") {
+    QDomElement user_element = root.tagName() == "users" ? root.firstChildElement("user") : root;
     while (!user_element.isNull()) {
       QDomElement status_element = status_element.firstChildElement("status");
 
@@ -68,12 +68,17 @@ void AbstractClient::replyed(int i) {
   reply->deleteLater();
 }
 
-int AbstractClient::request(const QString & url) {
+int AbstractClient::request(const QString & url, QOAuth::ParamMap map) {
+  QString requestUrl = auth.requestUrl(url, map);
+
   uint request_id = requestCounter++;
 
+  qDebug() << requestUrl;
+
   QNetworkRequest request;
-  request.setUrl(QUrl(url));
+  request.setUrl(QUrl(requestUrl));
   request.setRawHeader("User-Agent", "QTweetDeck");
+
 
   QNetworkReply *reply = AbstractClient::networkManager->get(request);
   connect(reply, SIGNAL(readyRead()), requestMapper, SLOT(map()));
@@ -85,5 +90,5 @@ int AbstractClient::request(const QString & url) {
 }
 
 void AbstractClient::slotError(QNetworkReply::NetworkError error) {
-  qDebug() << error;
+  qDebug() << "Error (AbstractClient): " << error;
 }

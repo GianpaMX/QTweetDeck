@@ -19,8 +19,14 @@ class QTWEETCORESHARED_EXPORT QTweet::Client : public QTweet::AbstractClient {
     void Error(const QString &error);
   public slots:
     Reply* requestPublicTimeLine();
-    Reply* requestUserTimeLine(const User &user);
+
+    Reply* requestUserTimeLine(qulonglong user_id);
+    Reply* requestUserTimeLine(const QString &screen_name);
+
+    Reply* requestStatus(qulonglong status_id);
   protected slots:
+    Reply* requestUserTimeLine(QOAuth::ParamMap parameters);
+
     virtual void processReply(int i, Tweets & tweets);
     virtual void notAuthorized(int i);
   private:

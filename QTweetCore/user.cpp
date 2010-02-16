@@ -4,6 +4,9 @@ using namespace QTweet;
 
 User::User() {
 }
+User::User(const User &other) {
+  *this = other;
+}
 
 void User::readDomElement(const QDomElement& xmluser) {
   setUserId(xmluser.firstChildElement("id").text().toULongLong());
@@ -38,4 +41,14 @@ QString User::profileimageurl() const {
 }
 void User::setProfileImageUrl(const QString &value) {
   user_profile_image_url = value;
+}
+
+User &User::operator=(const User &other) {
+  if( this != &other ) {
+    user_id = other.user_id;
+    user_name = other.user_name;
+    user_screen_name = other.user_screen_name;
+    user_profile_image_url = other.user_profile_image_url;
+  }
+  return *this;
 }

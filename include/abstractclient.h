@@ -1,6 +1,7 @@
 #ifndef ABSTRACTCLIENT_H
 #define ABSTRACTCLIENT_H
 
+#include <QtOAuth>
 #include <QtNetwork>
 #include <QObject>
 #include <QPointer>
@@ -11,6 +12,7 @@
 #include "QTweetCore_global.h"
 
 #include "statuslist.h"
+#include "oauth.h"
 
 class QTWEETCORESHARED_EXPORT QTweet::AbstractClient : public QObject {
   Q_OBJECT
@@ -23,7 +25,7 @@ class QTWEETCORESHARED_EXPORT QTweet::AbstractClient : public QObject {
     virtual void processReply(int i, Tweets & tweets) = 0;
     virtual void notAuthorized(int i) = 0;
   protected:
-    virtual int request(const QString & url);
+    virtual int request(const QString & url, QOAuth::ParamMap map = QOAuth::ParamMap());
   private slots:
     void replyed(int i);
     void slotError(QNetworkReply::NetworkError error);
@@ -34,6 +36,8 @@ class QTWEETCORESHARED_EXPORT QTweet::AbstractClient : public QObject {
 
     QPointer<QSignalMapper> requestMapper;
     int requestCounter;
+
+    OAuth auth;
 };
 
 #endif // ABSTRACTCLIENT_H

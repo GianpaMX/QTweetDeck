@@ -19,7 +19,6 @@ namespace QTweet {
   class OAuth;
 
   QDateTime fromStringDateTime(const QString& string);
-  void setConsumer(const QByteArray &key, const QByteArray &secret);
 }
 
 #endif // QTWEETCORE_H

@@ -4,6 +4,9 @@ using namespace QTweet;
 
 Status::Status() : User() {
 }
+Status::Status(const Status &other) : User(other) {
+  *this = other;
+}
 
 void Status::readDomElement(const QDomElement& xmluser) {
   setStatusId(xmluser.firstChildElement("id").text().toULongLong());
@@ -46,4 +49,14 @@ User Status::user() const {
 
 QDateTime Status::datetime() const {
   return createat();
+}
+
+Status &Status::operator=(const Status &other) {
+  if( this != &other ) {
+    status_id = other.status_id;
+    status_created_at = other.status_created_at;
+    status_text = other.status_text;
+    status_source = other.status_source;
+  }
+  return *this;
 }

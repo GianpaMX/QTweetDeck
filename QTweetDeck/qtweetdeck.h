@@ -13,7 +13,7 @@ class QTweetDeck : public QMainWindow {
   public slots:
     void printStatusList();
   private:
-    QTweet::Reply *r;
+    QTweet::Reply *r, *r2;
     QTweet::Client *c;
 };
 
