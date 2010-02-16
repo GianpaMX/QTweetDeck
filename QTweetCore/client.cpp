@@ -91,3 +91,19 @@ Reply* Client::requestUserFriends(const QString &screen_name) {
 Reply* Client::requestUserFriends(QOAuth::ParamMap parameters) {
   return request_and_map("http://twitter.com/statuses/friends.xml", parameters);
 }
+
+Reply* Client::requestUserFollowers(qulonglong user_id) {
+  QOAuth::ParamMap parameters;
+  parameters.insert("user_id", QString::number(user_id).toAscii());
+  return requestUserFollowers(parameters);
+}
+
+Reply* Client::requestUserFollowers(const QString &screen_name) {
+  QOAuth::ParamMap parameters;
+  parameters.insert("screen_name", screen_name.toAscii());
+  return requestUserFollowers(parameters);
+}
+
+Reply* Client::requestUserFollowers(QOAuth::ParamMap parameters) {
+  return request_and_map("http://twitter.com/statuses/followers.xml", parameters);
+}
