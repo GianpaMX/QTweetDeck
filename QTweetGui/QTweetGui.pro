@@ -9,10 +9,11 @@ INCLUDEPATH += ../include
 LIBS += -L../lib \
     -lQTweetCore
 DEFINES += QTWEETGUI_LIBRARY
-SOURCES += 
+SOURCES += tweetsmodel.cpp
 HEADERS += QTweetGui_global.h \
-    qtweetgui.h
+    qtweetgui.h \
+    tweetsmodel.h
 RESOURCES += 
-CONFIG += crypto
+CONFIG += crypto oauth
 QT += xml \
     network

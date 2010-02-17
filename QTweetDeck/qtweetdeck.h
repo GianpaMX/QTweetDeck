@@ -2,10 +2,10 @@
 #define QTWEETDECK_H
 
 #include <QtGui/QMainWindow>
+#include <QTableView>
 
 #include "qtweetcore.h"
-
-typedef QTweet::Tweets Tweets;
+#include "qtweetgui.h"
 
 class QTweetDeck : public QMainWindow {
   Q_OBJECT
@@ -14,10 +14,9 @@ class QTweetDeck : public QMainWindow {
     ~QTweetDeck();
   private:
     QTweet::AbstractUpdatableClient *client;
+    QTweet::TweetsModel *model;
 
-    QTweet::Tweets *data;
-  public slots:
-    void printNewDataArrived(Tweets *tweets);
+    QTableView *table;
 };
 
 #endif // QTWEETDECK_H
