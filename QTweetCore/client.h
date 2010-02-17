@@ -33,6 +33,9 @@ class QTWEETCORESHARED_EXPORT QTweet::Client : public QTweet::AbstractClient {
 
     Reply* requestUserFollowers(qulonglong user_id);
     Reply* requestUserFollowers(const QString &screen_name);
+
+
+    virtual Tweets* createEmptyData() const;
   protected slots:
     Reply* requestUserTimeLine(QOAuth::ParamMap parameters);
     Reply* requestUser(QOAuth::ParamMap parameters);
@@ -41,9 +44,9 @@ class QTWEETCORESHARED_EXPORT QTweet::Client : public QTweet::AbstractClient {
 
     Reply* request_and_map(const QString &url, QOAuth::ParamMap parameters = QOAuth::ParamMap());
 
-    virtual void processReply(int i, Tweets & tweets);
+    virtual void processReply(int i, Tweets *tweets);
     virtual void notAuthorized(int i);
-  private:
+  protected:
     QMap< int, QPointer<Reply> > replys;
 };
 

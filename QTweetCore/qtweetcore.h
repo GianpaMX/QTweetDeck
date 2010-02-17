@@ -6,6 +6,8 @@
 #include <QMap>
 
 namespace QTweet {
+  class Creatable;
+
   class AbstractClient;
   class Client;
   class User;
@@ -17,6 +19,11 @@ namespace QTweet {
   class Tweets;
 
   class OAuth;
+
+  class DataArrived;
+  class Updatable;
+  class AbstractUpdatableClient;
+  class PublicTimeLineClient;
 
   QDateTime fromStringDateTime(const QString& string);
 }

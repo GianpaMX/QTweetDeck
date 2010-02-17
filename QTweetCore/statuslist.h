@@ -16,6 +16,9 @@ class QTWEETCORESHARED_EXPORT QTweet::StatusList : public QList<QTweet::Status>,
 
     int countAll() const;
     const Tweet & tweetAt(int i) const;
+
+    void appendTweet(const Tweet &other);
+    void appendTweets(const Tweets &others);
 };
 
 #endif // STATUSLIST_H

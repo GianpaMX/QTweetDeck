@@ -10,7 +10,8 @@ LIBS += -L../lib \
     -lQTweetCore
 DEFINES += QTWEETGUI_LIBRARY
 SOURCES += 
-HEADERS += QTweetGui_global.h
+HEADERS += QTweetGui_global.h \
+    qtweetgui.h
 RESOURCES += 
 CONFIG += crypto
 QT += xml \

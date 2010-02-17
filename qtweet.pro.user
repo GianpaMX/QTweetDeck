@@ -73,7 +73,7 @@
     <value type="QString">CONFIG_PROTECT=/usr/share/X11/xkb /var/lib/hsqldb /usr/share/config</value>
     <value type="QString">CONFIG_PROTECT_MASK=/etc/gentoo-release /etc/sandbox.d /etc/env.d/java/ /etc/php/cli-php5/ext-active/ /etc/php/cgi-php5/ext-active/ /etc/php/apache2-php5/ext-active/ /etc/fonts/fonts.conf /etc/gconf /etc/terminfo /etc/ca-certificates.conf /etc/revdep-rebuild</value>
     <value type="QString">CVS_RSH=ssh</value>
-    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-0XJvATyb6a,guid=3fabe485fee494a16b6d2f224b71d52d</value>
+    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-BVdyV4FJLU,guid=67f36becbfc28d933c3e36f24b796f18</value>
     <value type="QString">DESKTOP_SESSION=default</value>
     <value type="QString">DISPLAY=:0.0</value>
     <value type="QString">DM_CONTROL=/var/run/xdmctl</value>
@@ -109,7 +109,7 @@
     <value type="QString">QT_PLUGIN_PATH=/home/juan/.kde4/lib/kde4/plugins/:/usr/lib/kde4/plugins/</value>
     <value type="QString">R_HOME=/usr/lib/R</value>
     <value type="QString">SANE_CONFIG_DIR=/etc/sane.d</value>
-    <value type="QString">SESSION_MANAGER=local/aspire:@/tmp/.ICE-unix/3324,unix/aspire:/tmp/.ICE-unix/3324</value>
+    <value type="QString">SESSION_MANAGER=local/aspire:@/tmp/.ICE-unix/4818,unix/aspire:/tmp/.ICE-unix/4818</value>
     <value type="QString">SHELL=/bin/bash</value>
     <value type="QString">SHLVL=1</value>
     <value type="QString">STRIGI_PLUGIN_PATH=/usr/lib/strigi:</value>
@@ -120,7 +120,7 @@
     <value type="QString">XCURSOR_THEME=Oxygen_Black</value>
     <value type="QString">XDG_CONFIG_DIRS=/etc/xdg</value>
     <value type="QString">XDG_DATA_DIRS=/usr/share:/usr/local/share:/usr/share</value>
-    <value type="QString">XDG_SESSION_COOKIE=43e98d62bee24031aa03f3f94b00691e-1265751341.688210-102247578</value>
+    <value type="QString">XDG_SESSION_COOKIE=43e98d62bee24031aa03f3f94b00691e-1266249496.335353-944200028</value>
     <value type="QString">XDM_MANAGED=method=classic</value>
     <value type="QString">_=/usr/lib/kde4/libexec/start_kdeinit_wrapper</value>
    </valuelist>
@@ -139,7 +139,7 @@
     <value type="QString">CONFIG_PROTECT=/usr/share/X11/xkb /var/lib/hsqldb /usr/share/config</value>
     <value type="QString">CONFIG_PROTECT_MASK=/etc/gentoo-release /etc/sandbox.d /etc/env.d/java/ /etc/php/cli-php5/ext-active/ /etc/php/cgi-php5/ext-active/ /etc/php/apache2-php5/ext-active/ /etc/fonts/fonts.conf /etc/gconf /etc/terminfo /etc/ca-certificates.conf /etc/revdep-rebuild</value>
     <value type="QString">CVS_RSH=ssh</value>
-    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-0XJvATyb6a,guid=3fabe485fee494a16b6d2f224b71d52d</value>
+    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-BVdyV4FJLU,guid=67f36becbfc28d933c3e36f24b796f18</value>
     <value type="QString">DESKTOP_SESSION=default</value>
     <value type="QString">DISPLAY=:0.0</value>
     <value type="QString">DM_CONTROL=/var/run/xdmctl</value>
@@ -175,7 +175,7 @@
     <value type="QString">QT_PLUGIN_PATH=/home/juan/.kde4/lib/kde4/plugins/:/usr/lib/kde4/plugins/</value>
     <value type="QString">R_HOME=/usr/lib/R</value>
     <value type="QString">SANE_CONFIG_DIR=/etc/sane.d</value>
-    <value type="QString">SESSION_MANAGER=local/aspire:@/tmp/.ICE-unix/3324,unix/aspire:/tmp/.ICE-unix/3324</value>
+    <value type="QString">SESSION_MANAGER=local/aspire:@/tmp/.ICE-unix/4818,unix/aspire:/tmp/.ICE-unix/4818</value>
     <value type="QString">SHELL=/bin/bash</value>
     <value type="QString">SHLVL=1</value>
     <value type="QString">STRIGI_PLUGIN_PATH=/usr/lib/strigi:</value>
@@ -186,7 +186,7 @@
     <value type="QString">XCURSOR_THEME=Oxygen_Black</value>
     <value type="QString">XDG_CONFIG_DIRS=/etc/xdg</value>
     <value type="QString">XDG_DATA_DIRS=/usr/share:/usr/local/share:/usr/share</value>
-    <value type="QString">XDG_SESSION_COOKIE=43e98d62bee24031aa03f3f94b00691e-1265751341.688210-102247578</value>
+    <value type="QString">XDG_SESSION_COOKIE=43e98d62bee24031aa03f3f94b00691e-1266249496.335353-944200028</value>
     <value type="QString">XDM_MANAGED=method=classic</value>
     <value type="QString">_=/usr/lib/kde4/libexec/start_kdeinit_wrapper</value>
    </valuelist>
@@ -211,7 +211,7 @@
     <value type="QString">CONFIG_PROTECT=/usr/share/X11/xkb /var/lib/hsqldb /usr/share/config</value>
     <value type="QString">CONFIG_PROTECT_MASK=/etc/gentoo-release /etc/sandbox.d /etc/env.d/java/ /etc/php/cli-php5/ext-active/ /etc/php/cgi-php5/ext-active/ /etc/php/apache2-php5/ext-active/ /etc/fonts/fonts.conf /etc/gconf /etc/terminfo /etc/ca-certificates.conf /etc/revdep-rebuild</value>
     <value type="QString">CVS_RSH=ssh</value>
-    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-0XJvATyb6a,guid=3fabe485fee494a16b6d2f224b71d52d</value>
+    <value type="QString">DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-BVdyV4FJLU,guid=67f36becbfc28d933c3e36f24b796f18</value>
     <value type="QString">DESKTOP_SESSION=default</value>
     <value type="QString">DISPLAY=:0.0</value>
     <value type="QString">DM_CONTROL=/var/run/xdmctl</value>
@@ -247,7 +247,7 @@
     <value type="QString">QT_PLUGIN_PATH=/home/juan/.kde4/lib/kde4/plugins/:/usr/lib/kde4/plugins/</value>
     <value type="QString">R_HOME=/usr/lib/R</value>
     <value type="QString">SANE_CONFIG_DIR=/etc/sane.d</value>
-    <value type="QString">SESSION_MANAGER=local/aspire:@/tmp/.ICE-unix/3324,unix/aspire:/tmp/.ICE-unix/3324</value>
+    <value type="QString">SESSION_MANAGER=local/aspire:@/tmp/.ICE-unix/4818,unix/aspire:/tmp/.ICE-unix/4818</value>
     <value type="QString">SHELL=/bin/bash</value>
     <value type="QString">SHLVL=1</value>
     <value type="QString">STRIGI_PLUGIN_PATH=/usr/lib/strigi:</value>
@@ -258,7 +258,7 @@
     <value type="QString">XCURSOR_THEME=Oxygen_Black</value>
     <value type="QString">XDG_CONFIG_DIRS=/etc/xdg</value>
     <value type="QString">XDG_DATA_DIRS=/usr/share:/usr/local/share:/usr/share</value>
-    <value type="QString">XDG_SESSION_COOKIE=43e98d62bee24031aa03f3f94b00691e-1265751341.688210-102247578</value>
+    <value type="QString">XDG_SESSION_COOKIE=43e98d62bee24031aa03f3f94b00691e-1266249496.335353-944200028</value>
     <value type="QString">XDM_MANAGED=method=classic</value>
     <value type="QString">_=/usr/lib/kde4/libexec/start_kdeinit_wrapper</value>
    </valuelist>

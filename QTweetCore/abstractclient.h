@@ -11,10 +11,12 @@
 #include "qtweetcore.h"
 #include "QTweetCore_global.h"
 
+#include "creatable.h"
+
 #include "statuslist.h"
 #include "oauth.h"
 
-class QTWEETCORESHARED_EXPORT QTweet::AbstractClient : public QObject {
+class QTWEETCORESHARED_EXPORT QTweet::AbstractClient : public QObject, public QTweet::Creatable {
   Q_OBJECT
   public:
     explicit AbstractClient(QObject *parent = 0);
@@ -22,7 +24,7 @@ class QTWEETCORESHARED_EXPORT QTweet::AbstractClient : public QObject {
   signals:
     void errorReplyed(int i, const QString &error);
   protected slots:
-    virtual void processReply(int i, Tweets & tweets) = 0;
+    virtual void processReply(int i, Tweets *tweets) = 0;
     virtual void notAuthorized(int i) = 0;
   protected:
     virtual int request(const QString & url, QOAuth::ParamMap map = QOAuth::ParamMap());

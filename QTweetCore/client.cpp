@@ -39,7 +39,7 @@ Reply* Client::requestStatus(qulonglong status_id) {
   return request_and_map( QString("http://twitter.com/statuses/show/%1.xml").arg(QString::number(status_id)) );
 }
 
-void Client::processReply(int i, Tweets & tweets) {
+void Client::processReply(int i, Tweets *tweets) {
   Reply *r = replys.value(i);
   r->setData(tweets);
 }
@@ -66,11 +66,10 @@ Reply* Client::requestUser(QOAuth::ParamMap parameters) {
 }
 
 Reply* Client::request_and_map(const QString &url, QOAuth::ParamMap parameters) {
-  StatusList *statuses = new StatusList;
-  Reply *r = new Reply(*statuses);
+  Tweets *statuses = createEmptyData();
+  Reply *r = new Reply(statuses);
 
   int i = request(url, parameters);
-
   replys.insert(i, r);
 
   return r;
@@ -106,4 +105,8 @@ Reply* Client::requestUserFollowers(const QString &screen_name) {
 
 Reply* Client::requestUserFollowers(QOAuth::ParamMap parameters) {
   return request_and_map("http://twitter.com/statuses/followers.xml", parameters);
+}
+
+Tweets* Client::createEmptyData() const {
+  return new StatusList;
 }

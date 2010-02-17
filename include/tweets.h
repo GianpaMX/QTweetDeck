@@ -10,6 +10,9 @@ class QTWEETCORESHARED_EXPORT QTweet::Tweets {
   public:
     virtual int countAll() const = 0;
     virtual const Tweet & tweetAt(int i) const = 0;
+
+    virtual void appendTweet(const Tweet &other) = 0;
+    virtual void appendTweets(const Tweets &others) = 0;
 };
 
 #endif // TWEETS_H

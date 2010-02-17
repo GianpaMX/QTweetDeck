@@ -1,6 +1,7 @@
 #include <QtXml>
 #include <QDebug>
 #include "abstractclient.h"
+#include "tweets.h"
 
 using namespace QTweet;
 
@@ -18,7 +19,7 @@ AbstractClient::~AbstractClient() {
 
 void AbstractClient::replyed(int i) {
   QPointer<QNetworkReply> reply = static_cast<QNetworkReply*>(requestMapper->mapping(i));
-  StatusList *statuses = new StatusList();
+  Tweets *statuses = createEmptyData();
   QDomDocument domDocument;
   QString error;
 
@@ -44,7 +45,7 @@ void AbstractClient::replyed(int i) {
       status.readDomElement(status_element);
       user.readDomElement(user_element);
 
-      *statuses << status;
+      statuses->appendTweet(status);
 
       status_element = status_element.nextSiblingElement("status");
     }
@@ -59,13 +60,13 @@ void AbstractClient::replyed(int i) {
       status.readDomElement(status_element);
       user.readDomElement(user_element);
 
-      *statuses << status;
+      statuses->appendTweet(status);
 
       user_element = user_element.nextSiblingElement("user");
     }
   }
 
-  processReply(i, *statuses);
+  processReply(i, statuses);
 
   reply->deleteLater();
 }
