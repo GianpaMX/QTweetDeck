@@ -4,7 +4,7 @@
 #include "cache.h"
 
 #include "qtweetdeck.h"
-#include "usertimeline.h"
+#include "usertimelineclient.h"
 #include "tweetsmodel.h"
 
 QTweetDeck::QTweetDeck(QWidget *parent) : QMainWindow(parent) {
@@ -14,7 +14,7 @@ QTweetDeck::QTweetDeck(QWidget *parent) : QMainWindow(parent) {
 
   table = new QTableView();
 
-  client = new QTweet::UserTimeLine("ohbill");
+  client = new QTweet::UserTimeLineClient("ohbill");
   model = new QTweet::TweetsModel(client, table);
 
   table->setModel(model);

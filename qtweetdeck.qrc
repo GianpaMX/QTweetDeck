@@ -1,0 +1,5 @@
+<RCC>
+  <qresource>
+    <file>data/cached.sqlite3</file>
+  </qresource>
+</RCC>

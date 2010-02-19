@@ -18,7 +18,7 @@ SOURCES += client.cpp \
     abstractupdatableclient.cpp \
     publictimelineclient.cpp \
     cache.cpp \
-    usertimeline.cpp
+    usertimelineclient.cpp
 HEADERS += QTweetCore_global.h \
     client.h \
     abstractclient.h \
@@ -36,7 +36,7 @@ HEADERS += QTweetCore_global.h \
     dataarrived.h \
     publictimelineclient.h \
     cache.h \
-    usertimeline.h
+    usertimelineclient.h
 QT += network \
     xml \
     sql
