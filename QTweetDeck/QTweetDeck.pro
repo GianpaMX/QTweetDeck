@@ -14,6 +14,8 @@ SOURCES += main.cpp \
     consumer_key_secret.cpp
 HEADERS += qtweetdeck.h
 QT += xml \
-    network
+    network \
+    sql
 CONFIG += crypto
 CONFIG += oauth
+RESOURCES += 

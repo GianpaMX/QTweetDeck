@@ -3,10 +3,14 @@
 using namespace QTweet;
 
 User::User() {
+  user_id = 0;
 }
 User::User(const User &other) {
   *this = other;
 }
+User::~User() {
+}
+
 
 void User::readDomElement(const QDomElement& xmluser) {
   setUserId(xmluser.firstChildElement("id").text().toULongLong());
@@ -43,12 +47,20 @@ void User::setProfileImageUrl(const QString &value) {
   user_profile_image_url = value;
 }
 
+QByteArray User::profileimagebytearray() const {
+  return user_profile_image_bytearray;
+}
+void User::setProfileImageByteArray(const QByteArray &value) {
+  user_profile_image_bytearray = value;
+}
+
 User &User::operator=(const User &other) {
   if( this != &other ) {
     user_id = other.user_id;
     user_name = other.user_name;
     user_screen_name = other.user_screen_name;
     user_profile_image_url = other.user_profile_image_url;
+    user_profile_image_bytearray = other.user_profile_image_bytearray;
   }
   return *this;
 }

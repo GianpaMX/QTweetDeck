@@ -1,7 +1,9 @@
 #include <QtXml>
+#include <QtSql>
 #include <QDebug>
 #include "abstractclient.h"
 #include "tweets.h"
+#include "cache.h"
 
 using namespace QTweet;
 
@@ -45,6 +47,20 @@ void AbstractClient::replyed(int i) {
       status.readDomElement(status_element);
       user.readDomElement(user_element);
 
+      if( Cache::isEnabled() ) {
+        Cache &cache = Cache::Data();
+        if (cache.error().type() == QSqlError::NoError) {
+          cache << status;
+          if( status.inreplytouser() != 0 && (status.inreplytouser()->userid() != 0 || status.inreplytoscreenname() != "") ) {
+            cache >> *status.inreplytouser();
+          }
+          if( status.inreplytostatus() != 0 ) {
+            cache >> *status.inreplytostatus();
+          }
+        } else
+          qDebug() << "Cache ERROR";
+      }
+
       statuses->appendTweet(status);
 
       status_element = status_element.nextSiblingElement("status");
@@ -59,6 +75,20 @@ void AbstractClient::replyed(int i) {
 
       status.readDomElement(status_element);
       user.readDomElement(user_element);
+
+      if( Cache::isEnabled() ) {
+        Cache &cache = Cache::Data();
+        if (cache.error().type() == QSqlError::NoError) {
+          cache << status;
+          if( status.inreplytouser() != 0 && (status.inreplytouser()->userid() != 0 || status.inreplytoscreenname() != "") ) {
+            cache >> *status.inreplytouser();
+          }
+          if( status.inreplytostatus() != 0 ) {
+            cache >> *status.inreplytostatus();
+          }
+        } else
+          qDebug() << "Cache ERROR";
+      }
 
       statuses->appendTweet(status);
 
@@ -76,7 +106,7 @@ int AbstractClient::request(const QString & url, QOAuth::ParamMap map) {
 
   uint request_id = requestCounter++;
 
-  qDebug() << requestUrl;
+//  qDebug() << requestUrl;
 
   QNetworkRequest request;
   request.setUrl(QUrl(requestUrl));

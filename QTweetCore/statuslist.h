@@ -19,6 +19,12 @@ class QTWEETCORESHARED_EXPORT QTweet::StatusList : public QList<QTweet::Status>,
 
     void appendTweet(const Tweet &other);
     void appendTweets(const Tweets &others);
+
+    void prependTweet(const Tweet &other);
+    void prependTweets(const Tweets &others);
+
+    virtual bool containsTweet(const Tweet &other);
+    virtual int containsTweets(const Tweets &others);
 };
 
 #endif // STATUSLIST_H

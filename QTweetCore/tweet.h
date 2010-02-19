@@ -15,6 +15,7 @@ class QTWEETCORESHARED_EXPORT QTweet::Tweet {
   virtual QString text() const = 0;
   virtual QDateTime datetime() const = 0;
   virtual QString source() const = 0;
+  virtual bool operator==(const Tweet &other) const = 0;
 };
 
 #endif // TWEET_H

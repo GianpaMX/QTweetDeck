@@ -24,6 +24,9 @@ namespace QTweet {
   class Updatable;
   class AbstractUpdatableClient;
   class PublicTimeLineClient;
+  class UserTimeLine;
+
+  class Cache;
 
   QDateTime fromStringDateTime(const QString& string);
 }

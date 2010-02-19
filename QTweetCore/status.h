@@ -16,8 +16,9 @@ class QTWEETCORESHARED_EXPORT QTweet::Status : public QTweet::User, public virtu
   public:
     Status();
     Status(const Status &other);
+    virtual ~Status();
 
-    void readDomElement(const QDomElement& xmluser);
+    void readDomElement(const QDomElement& xmlstatus);
 
     qulonglong statusid() const;
     void setStatusId(qulonglong value);
@@ -35,12 +36,25 @@ class QTWEETCORESHARED_EXPORT QTweet::Status : public QTweet::User, public virtu
     QString source() const;
     void setSource(const QString &value);
 
+    Status* inreplytostatus() const;
+    void setInReplyToStatus(Status *value);
+
+    User* inreplytouser() const;
+    void setInReplyToUser(const User *value);
+
+    QString inreplytoscreenname() const;
+    void setInReplyToScreenName(const QString &value);
+
     Status &operator=(const Status &other);
+
+    bool operator==(const Tweet &other) const;
   private:
     qulonglong status_id;
     QDateTime status_created_at;
     QString status_text;
     QString status_source;
+    Status *status_in_replay_to_status;
+    User *status_in_replay_to_user;
 };
 
 #endif // STATUS_H
