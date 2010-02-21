@@ -67,6 +67,9 @@ void Status::setSource(const QString &value) {
 User Status::user() const {
   return *this;
 }
+User& Status::user() {
+  return *this;
+}
 
 QDateTime Status::datetime() const {
   return createat();

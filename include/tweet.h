@@ -12,6 +12,7 @@ class QTWEETCORESHARED_EXPORT QTweet::Tweet {
   public:
   virtual qulonglong statusid() const = 0;
   virtual User user() const = 0;
+  virtual User& user() = 0;
   virtual QString text() const = 0;
   virtual QDateTime datetime() const = 0;
   virtual QString source() const = 0;

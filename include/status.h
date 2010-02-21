@@ -27,6 +27,8 @@ class QTWEETCORESHARED_EXPORT QTweet::Status : public QTweet::User, public virtu
     void setCreateAt(const QDateTime &value);
 
     User user() const;
+    User& user();
+
 
     QString text() const;
     void setText(const QString &value);
