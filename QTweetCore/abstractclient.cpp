@@ -13,6 +13,7 @@ AbstractClient::AbstractClient(QObject *parent) : QObject(parent) {
   requestMapper = new QSignalMapper();
   requestCounter = 0;
   connect(requestMapper, SIGNAL(mapped(int)), this, SLOT(replyed(int)));
+  connect(requestMapper, SIGNAL(mapped(QString)), this, SLOT(replyed(QString)));
 }
 
 AbstractClient::~AbstractClient() {
@@ -36,13 +37,24 @@ void AbstractClient::replyed(int i) {
   if(root.tagName() == "hash") {
     notAuthorized(i);
     emit errorReplyed(i, root.firstChildElement("error").text());
-  } else if(root.tagName() == "statuses" || root.tagName() == "status") {
-    QDomElement status_element = root.tagName() == "statuses" ? root.firstChildElement("status") : root;
-    while (!status_element.isNull()) {
-      QDomElement user_element = status_element.firstChildElement("user");
+  } else {
+    QDomElement parent_element;
+    parent_element = root.tagName() == "statuses" ? root.firstChildElement("status") :
+                     root.tagName() == "status" ? root :
+                     root.tagName() == "users" ? root.firstChildElement("user") :
+                     root.tagName() ==  "user" ? root :
+                     QDomElement();
+    while (!parent_element.isNull()) {
+      QDomElement child_element = root.tagName() == "statuses" || root.tagName() == "status" ? parent_element.firstChildElement("user") :
+                                 root.tagName() == "users" || root.tagName() ==  "user" ? parent_element.firstChildElement("status") :
+                                 QDomElement();
 
       Status status;
       User & user = status;
+
+      QDomElement &status_element = root.tagName() == "statuses" || root.tagName() == "status" ? parent_element : child_element;
+      QDomElement &user_element = root.tagName() == "statuses" || root.tagName() == "status" ? child_element : parent_element;
+
 
       status.readDomElement(status_element);
       user.readDomElement(user_element);
@@ -63,36 +75,10 @@ void AbstractClient::replyed(int i) {
 
       statuses->appendTweet(status);
 
-      status_element = status_element.nextSiblingElement("status");
-    }
-  } else if(root.tagName() == "users" || root.tagName() == "user") {
-    QDomElement user_element = root.tagName() == "users" ? root.firstChildElement("user") : root;
-    while (!user_element.isNull()) {
-      QDomElement status_element = user_element.firstChildElement("status");
-
-      Status status;
-      User & user = status;
-
-      status.readDomElement(status_element);
-      user.readDomElement(user_element);
-
-      if( Cache::isEnabled() ) {
-        Cache &cache = Cache::Data();
-        if (cache.error().type() == QSqlError::NoError) {
-          cache << status;
-          if( status.inreplytouser() != 0 && (status.inreplytouser()->userid() != 0 || status.inreplytoscreenname() != "") ) {
-            cache >> *status.inreplytouser();
-          }
-          if( status.inreplytostatus() != 0 ) {
-            cache >> *status.inreplytostatus();
-          }
-        } else
-          qDebug() << "Cache ERROR";
-      }
-
-      statuses->appendTweet(status);
-
-      user_element = user_element.nextSiblingElement("user");
+      QString nextSiblingElement = root.tagName() == "statuses" || root.tagName() == "status" ? "status" :
+                                 root.tagName() == "users" || root.tagName() ==  "user" ? "user" :
+                                 QString();
+      parent_element = parent_element.nextSiblingElement(nextSiblingElement);
     }
   }
 

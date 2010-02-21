@@ -28,6 +28,7 @@ class QTWEETCORESHARED_EXPORT QTweet::AbstractClient : public QObject, public QT
     virtual void notAuthorized(int i) = 0;
   protected:
     virtual int request(const QString & url, QOAuth::ParamMap map = QOAuth::ParamMap());
+    virtual QString request(const QString & url);
   private slots:
     void replyed(int i);
     void slotError(QNetworkReply::NetworkError error);
