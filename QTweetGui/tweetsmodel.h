@@ -22,6 +22,7 @@ class QTWEETGUISHARED_EXPORT QTweet::TweetsModel : public QAbstractTableModel {
   protected slots:
     void appendData(Tweets *new_data);
     void prependData(Tweets *new_data);
+    void notifyDataChanged(const QString &url);
   private:
     AbstractUpdatableClient *client;
     Tweets *tweets;

@@ -67,7 +67,7 @@ void Status::setSource(const QString &value) {
 User Status::user() const {
   return *this;
 }
-User& Status::user() {
+User& Status::userRef() {
   return *this;
 }
 

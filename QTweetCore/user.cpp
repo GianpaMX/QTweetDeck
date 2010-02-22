@@ -16,7 +16,7 @@ void User::readDomElement(const QDomElement& xmluser) {
   setUserId(xmluser.firstChildElement("id").text().toULongLong());
   setName(xmluser.firstChildElement("name").text());
   setScreenName(xmluser.firstChildElement("screen_name").text());
-  setProfileImageUrl(xmluser.firstChildElement("profile_image_url").text());
+  setProfileImage(Image(xmluser.firstChildElement("profile_image_url").text()));
 }
 
 qulonglong User::userid() const {
@@ -40,18 +40,11 @@ void User::setScreenName(const QString &value) {
   user_screen_name = value;
 }
 
-QString User::profileimageurl() const {
-  return user_profile_image_url;
+Image User::profileImage() const {
+  return user_profile_image;
 }
-void User::setProfileImageUrl(const QString &value) {
-  user_profile_image_url = value;
-}
-
-QByteArray User::profileimagebytearray() const {
-  return user_profile_image_bytearray;
-}
-void User::setProfileImageByteArray(const QByteArray &value) {
-  user_profile_image_bytearray = value;
+void User::setProfileImage(const Image &value) {
+  user_profile_image = value;
 }
 
 User &User::operator=(const User &other) {
@@ -59,8 +52,7 @@ User &User::operator=(const User &other) {
     user_id = other.user_id;
     user_name = other.user_name;
     user_screen_name = other.user_screen_name;
-    user_profile_image_url = other.user_profile_image_url;
-    user_profile_image_bytearray = other.user_profile_image_bytearray;
+    user_profile_image = other.user_profile_image;
   }
   return *this;
 }

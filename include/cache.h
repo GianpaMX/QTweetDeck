@@ -17,11 +17,18 @@ class QTWEETCORESHARED_EXPORT QTweet::Cache {
 
     static bool isEnabled();
 
+    bool Exists(const Status &status);
+    bool Exists(const User &user);
+    bool Exists(const Image &image);
+
     Cache &operator<<(const Status &status);
     Cache &operator>>(Status &status);
 
     Cache &operator<<(const User &user);
     Cache &operator>>(User &user);
+
+    Cache &operator<<(const Image &image);
+    Cache &operator>>(Image &image);
   private:
     Cache(const QString &cache_name);
     Cache(const Cache &other);

@@ -14,6 +14,10 @@ int StatusList::countAll() const {
 const Tweet & StatusList::tweetAt(int i) const {
   return at(i);
 }
+Tweet & StatusList::tweetRefAt(int i) {
+  StatusList &refthis = *this;
+  return refthis[i];
+}
 
 void StatusList::appendTweet(const Tweet &other) {
   if(!containsTweet(other))

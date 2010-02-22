@@ -1,4 +1,5 @@
 #include <QDebug>
+#include <QImage>
 
 #include "tweetsmodel.h"
 #include "tweets.h"
@@ -46,7 +47,11 @@ QVariant TweetsModel::data(const QModelIndex &index, int role) const {
     default: return QVariant();
     }
   } else if(role == Qt::DecorationRole) {
-
+    if( tweets->tweetAt(index.row()).user().profileImage().bytes() != QByteArray() ) {
+      QImage image;
+      image.loadFromData(tweets->tweetAt(index.row()).user().profileImage().bytes());
+      return image;
+    }
   }
 
   return QVariant();
@@ -69,5 +74,15 @@ void TweetsModel::prependData(Tweets *new_data) {
   tweets->prependTweets(*new_data);
   endInsertRows();
 
+  client->requestProfileImages(tweets);
+  connect(client, SIGNAL(imageLoaded(QString)), this, SLOT(notifyDataChanged(QString)));
+
   qDebug() << tweets->countAll();
+}
+
+void TweetsModel::notifyDataChanged(const QString &url) {
+  for(int i = 0; i < tweets->countAll(); i++) {
+    if( tweets->tweetAt(i).user().profileImage().url() == url )
+      emit dataChanged(index(i, 0, QModelIndex()), index(i, 0, QModelIndex()));
+  }
 }

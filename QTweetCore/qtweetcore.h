@@ -25,6 +25,7 @@ namespace QTweet {
   class AbstractUpdatableClient;
   class PublicTimeLineClient;
   class UserTimeLineClient;
+  class Image;
 
   class Cache;
 

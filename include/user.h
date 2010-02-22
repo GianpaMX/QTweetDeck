@@ -9,6 +9,8 @@
 #include "qtweetcore.h"
 #include "QTweetCore_global.h"
 
+#include "image.h"
+
 class QTWEETCORESHARED_EXPORT QTweet::User {
   public:
     User();
@@ -26,19 +28,15 @@ class QTWEETCORESHARED_EXPORT QTweet::User {
     QString screenname() const;
     void setScreenName(const QString &value);
 
-    QString profileimageurl() const;
-    void setProfileImageUrl(const QString &value);
-
-    QByteArray profileimagebytearray() const;
-    void setProfileImageByteArray(const QByteArray &value);
+    Image profileImage() const;
+    void setProfileImage(const Image &value);
 
     User &operator=(const User &other);
   private:
     qulonglong user_id;
     QString user_name;
     QString user_screen_name;
-    QString user_profile_image_url;
-    QByteArray user_profile_image_bytearray;
+    Image user_profile_image;
 };
 
 #endif // USER_H

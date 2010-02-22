@@ -49,7 +49,7 @@ QSqlError Cache::initDb(const QString &cache_name) {
     return QSqlError();
 
   QSqlQuery q;
-  if(!q.exec(QLatin1String("CREATE TABLE image(url TEXT NOT NULL, data BLOB)")))
+  if(!q.exec(QLatin1String("CREATE TABLE image(url TEXT NOT NULL, bytes BLOB)")))
     return q.lastError();
   if(!q.exec(QLatin1String("CREATE TABLE user(id INTEGER PRIMARY KEY NOT NULL, name TEXT, screen_name TEXT NOT NULL, profile_image_url TEXT)")))
     return q.lastError();
@@ -63,9 +63,48 @@ Cache &Cache::Data() {
   return *instance;
 }
 
+bool Cache::Exists(const Status &status) {
+  QSqlQuery q;
+  if(q.prepare(QLatin1String("SELECT * FROM status WHERE id = ?"))) {
+    q.addBindValue(status.statusid());
+    q.exec();
+    return q.next() == true;
+  }
+
+  return false;
+}
+bool Cache::Exists(const User &user) {
+  QSqlQuery q;
+  if(q.prepare(QLatin1String("SELECT * FROM user WHERE id = ?"))) {
+    q.addBindValue(user.userid());
+    q.exec();
+    return q.next() == true;
+  }
+
+  return false;
+}
+bool Cache::Exists(const Image &image) {
+  QSqlQuery q;
+  if(q.prepare(QLatin1String("SELECT * FROM image WHERE url = ?"))) {
+    q.addBindValue(image.url());
+    q.exec();
+    return q.next() == true;
+  }
+
+  return false;
+}
+
 Cache &Cache::operator<<(const Status &status) {
   if(status.statusid() != 0 ) {
     QSqlQuery q;
+
+    if( Exists(status) ) {
+      if(q.prepare(QLatin1String("DELETE FROM FROM status WHERE id = ?"))) {
+        q.addBindValue(status.statusid());
+        q.exec();
+      }
+    }
+
     if(q.prepare(QLatin1String("INSERT INTO status(id, create_at, text, source, in_reply_to_status_id, in_reply_to_user_id, in_reply_to_screen_name) values(?, ?, ?, ?, ?, ?, ?)"))) {
       q.addBindValue(status.statusid());
       q.addBindValue(status.createat());
@@ -114,11 +153,19 @@ Cache &Cache::operator>>(Status &status) {
 Cache &Cache::operator<<(const User &user) {
   if(user.userid() != 0 ) {
     QSqlQuery q;
+
+    if(Exists(user)) {
+      if(q.prepare(QLatin1String("DELETE FROM FROM user WHERE id = ?"))) {
+        q.addBindValue(user.userid());
+        q.exec();
+      }
+    }
+
     if(q.prepare(QLatin1String("INSERT INTO user(id, name, screen_name, profile_image_url) values(?, ?, ?, ?)"))) {
       q.addBindValue(user.userid());
       q.addBindValue(user.name());
       q.addBindValue(user.screenname());
-      q.addBindValue(user.profileimageurl());
+      q.addBindValue(user.profileImage().url());
       q.exec();
     }
   }
@@ -136,10 +183,45 @@ Cache &Cache::operator>>(User &user) {
         user.setUserId(q.value(0).toULongLong());
         user.setName(q.value(1).toString());
         user.setScreenName(q.value(2).toString());
-        user.setProfileImageUrl(q.value(3).toString());
+        user.setProfileImage(Image(q.value(3).toString()));
       }
     }
   }
   return *this;
 }
 
+
+Cache &Cache::operator<<(const Image &image) {
+  if(image.url() != "" ) {
+    QSqlQuery q;
+
+    if(Exists(image)) {
+      if(q.prepare(QLatin1String("DELETE FROM image WHERE url = ?"))) {
+        q.addBindValue(image.url());
+        if(!q.exec()) qDebug() << q.lastError().text();
+      } else
+        qWarning() << q.lastError().text();
+    }
+
+    if(q.prepare(QLatin1String("INSERT INTO image(url, bytes) values(?, ?)"))) {
+      q.addBindValue(image.url());
+      q.addBindValue(image.bytes());
+      if(!q.exec()) qDebug() << q.lastError().text();
+    }
+  }
+  return *this;
+}
+
+Cache &Cache::operator>>(Image &image) {
+  if(image.url() != "") {
+    QSqlQuery q;
+    if(q.prepare(QLatin1String("SELECT bytes FROM image WHERE url = ?"))) {
+      q.addBindValue(image.url());
+      q.exec();
+      while (q.next()) {
+        image.setBytes(q.value(0).toByteArray());
+      }
+    }
+  }
+  return *this;
+}

@@ -21,15 +21,20 @@ class QTWEETCORESHARED_EXPORT QTweet::AbstractClient : public QObject, public QT
   public:
     explicit AbstractClient(QObject *parent = 0);
     virtual ~AbstractClient();
+
+    void requestProfileImages(Tweets *tweets);
   signals:
     void errorReplyed(int i, const QString &error);
+    void imageLoaded(const QString &url);
   protected slots:
     virtual void processReply(int i, Tweets *tweets) = 0;
     virtual void notAuthorized(int i) = 0;
   protected:
     virtual int request(const QString & url, QOAuth::ParamMap map = QOAuth::ParamMap());
+    virtual QString requestURL(const QString & url);
   private slots:
     void replyed(int i);
+    void replyed(const QString &url);
     void slotError(QNetworkReply::NetworkError error);
   private:
     Q_DISABLE_COPY(AbstractClient)
@@ -40,6 +45,8 @@ class QTWEETCORESHARED_EXPORT QTweet::AbstractClient : public QObject, public QT
     int requestCounter;
 
     OAuth auth;
+
+    Tweets *tweets;
 };
 
 #endif // ABSTRACTCLIENT_H
